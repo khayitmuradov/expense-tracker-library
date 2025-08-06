@@ -6,7 +6,23 @@
 
         public void AddExpense(Expense expense)
         {
-            if (expense == null) throw new ArgumentNullException(nameof(expense));
+            if (expense == null)
+            {
+                throw new ArgumentNullException(nameof(expense));
+            }
+            if (expense.Amount < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(expense.Amount), $"{expense.Amount} cannot be negative.");
+            }
+            if (string.IsNullOrWhiteSpace(expense.Category))
+            {
+                throw new ArgumentNullException(nameof(expense.Category), $"{expense.Category} cannot be null.");
+            }
+            if (expense.Date == null)
+            {
+                throw new ArgumentNullException(nameof(expense.Date), $"{expense.Date} cannot be null.");
+            }
+
             _expenses.Add(expense);
         }
 
