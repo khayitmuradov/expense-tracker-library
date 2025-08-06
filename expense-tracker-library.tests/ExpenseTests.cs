@@ -14,21 +14,18 @@ namespace expense_tracker_library.tests
         [InlineData(-1)]
         public void Expense_ShouldThrow_IfAmountNegative(decimal amount)
         {
-            //arrange
             Expense expense = new Expense()
             {
                 Amount = amount,
             };
             var expenseManager = new ExpenseManager();
 
-            //act + assert
             Assert.Throws<ArgumentOutOfRangeException>(() => expenseManager.AddExpense(expense));
         }
 
         [Fact]
         public void Expense_ShouldThrow_IfCategoryIsNull()
         {
-            // arrange
             var expense = new Expense
             {
                 Amount = 10m,
@@ -38,7 +35,6 @@ namespace expense_tracker_library.tests
             };
             var expenseManager = new ExpenseManager();
 
-            // act & assert
             Assert.Throws<ArgumentNullException>(() => expenseManager.AddExpense(expense));
         }
 
