@@ -215,7 +215,7 @@ namespace expense_tracker_library.tests
                 Description = "Bus Ticket"
             };
             ExpenseManager expenseManager = new ExpenseManager();
-            
+
             expenseManager.AddExpense(expense1);
             expenseManager.AddExpense(expense2);
             expenseManager.AddExpense(expense3);
