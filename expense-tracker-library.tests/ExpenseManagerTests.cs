@@ -28,11 +28,44 @@ namespace expense_tracker_library.tests
         }
 
         [Fact]
+        public void AddExpense_ShouldThrow_WhenAmountIsNegative()
+        {
+            ExpenseManager expenseManager = new ExpenseManager();
+            var expense = new Expense
+            {
+                Amount = -10,
+                Category = "Food",
+                Date = DateTime.UtcNow,
+                Description = "Burger"
+            };
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => expenseManager.AddExpense(expense));
+        }
+
+        [Fact]
         public void AddExpense_ShouldThrow_WhenExpenseIsNull()
         {
             ExpenseManager expenseManager = new ExpenseManager();
 
             Assert.Throws<ArgumentNullException>(() => expenseManager.AddExpense(null!));
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void AddExpense_ShouldThrow_WhenCategoryIsNullOrWhitespace(string category)
+        {
+            ExpenseManager expenseManager = new ExpenseManager();
+            var expense = new Expense
+            {
+                Amount = 10,
+                Category = category,
+                Date = DateTime.UtcNow,
+                Description = "Burger"
+            };
+
+            Assert.Throws<ArgumentNullException>(() => expenseManager.AddExpense(expense));
         }
 
         [Fact]
